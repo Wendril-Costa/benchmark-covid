@@ -24,7 +24,7 @@ public class HelloFlowView extends HorizontalLayout {
         name = new TextField("Your name");
         sayHello = new Button("Say hello");
         sayHello.addClickListener(e -> {
-            Notification.show("Hello " + name.getValue());
+            Notification.show("HelloW " + name.getValue());
         });
         sayHello.addClickShortcut(Key.ENTER);
 
