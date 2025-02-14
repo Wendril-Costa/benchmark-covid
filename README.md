@@ -27,25 +27,25 @@ GET http://localhost:8080/api/compare/brazil/canada?from=2020-03-08&to=2020-03-1
 ```
 
 # Telas
-## Login
+#### Login
 <img src="https://github.com/user-attachments/assets/15f8e151-95db-4c14-a2d5-e190792873c6" alt="Descrição da Imagem" width="500">
 
-## Cadastro
+#### Cadastro
 <img src="https://github.com/user-attachments/assets/5b2b9516-934c-42fb-8977-1679b6592322" alt="Descrição da Imagem" width="500">
 
-## Benchmark
+#### Benchmark
 <img src="https://github.com/user-attachments/assets/1d442138-f570-4e76-91d5-a76620296999" alt="Descrição da Imagem" width="500">
 
-## Result Benchmark
+#### Result Benchmark
 <img src="https://github.com/user-attachments/assets/f68c3c94-3475-49b7-a8c3-304633bc4e08" alt="Descrição da Imagem" width="500">
 
-## History
+#### History
 <img src="https://github.com/user-attachments/assets/aa108cfd-ee5d-40c3-90ee-550b566ccead" alt="Descrição da Imagem" width="500">
 
-## Button Deletar
+#### Button Deletar
 <img src="https://github.com/user-attachments/assets/9f395694-26f3-4d85-890c-6b2f7edd0c72" alt="Descrição da Imagem" width="500">
 
-## Editar Usuario
+#### Editar Usuario
 <img src="https://github.com/user-attachments/assets/26d1df85-386e-405e-b898-eae11ea60908" alt="Descrição da Imagem" width="500">
 
 ## Implantando na produção
