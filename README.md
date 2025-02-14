@@ -52,7 +52,7 @@ java -jar target/benchmark-covid-1.0-SNAPSHOT.jar
 │   ├── 📄 UserController.java
 │
 ├── 📂 data
-│   └── (Pasta vazia ou futura implementação)
+│   └── (Pasta para dados de Id das Model, Role, CovidApiProperties)
 │
 ├── 📂 model
 │   ├── 📄 Benchmark.java
