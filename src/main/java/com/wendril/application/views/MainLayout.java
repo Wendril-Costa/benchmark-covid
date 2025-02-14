@@ -1,11 +1,12 @@
-package com.example.application.views;
+package com.wendril.application.views;
 
-import com.example.application.data.User;
-import com.example.application.security.AuthenticatedUser;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
+import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Footer;
@@ -15,36 +16,45 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.SvgIcon;
 import com.vaadin.flow.component.menubar.MenuBar;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
-import com.vaadin.flow.router.Layout;
+import com.vaadin.flow.component.textfield.EmailField;
+import com.vaadin.flow.component.textfield.PasswordField;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.auth.AccessAnnotationChecker;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.server.menu.MenuConfiguration;
 import com.vaadin.flow.server.menu.MenuEntry;
 import com.vaadin.flow.theme.lumo.LumoUtility;
+import com.wendril.application.controller.UserController;
+import com.wendril.application.model.User;
+import com.wendril.application.security.AuthenticatedUser;
+import com.wendril.application.utils.Titles;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import java.io.ByteArrayInputStream;
+import java.io.Serial;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * The main view is a top-level placeholder for other views.
- */
-@Layout
 @AnonymousAllowed
 public class MainLayout extends AppLayout {
-
+    @Serial
+    private static final long serialVersionUID = 1L;
+    private final AuthenticatedUser authenticatedUser;
+    private final AccessAnnotationChecker accessChecker;
+    private final UserController userController;
     private H1 viewTitle;
 
-    private AuthenticatedUser authenticatedUser;
-    private AccessAnnotationChecker accessChecker;
-
-    public MainLayout(AuthenticatedUser authenticatedUser, AccessAnnotationChecker accessChecker) {
+    public MainLayout(AuthenticatedUser authenticatedUser, AccessAnnotationChecker accessChecker, UserController userController) {
         this.authenticatedUser = authenticatedUser;
         this.accessChecker = accessChecker;
-
+        this.userController = userController;
         setPrimarySection(Section.DRAWER);
         addDrawerContent();
         addHeaderContent();
@@ -61,7 +71,7 @@ public class MainLayout extends AppLayout {
     }
 
     private void addDrawerContent() {
-        Span appName = new Span("benchmark-covid");
+        Span appName = new Span(Titles.TITULO_APLICATION);
         appName.addClassNames(LumoUtility.FontWeight.SEMIBOLD, LumoUtility.FontSize.LARGE);
         Header header = new Header(appName);
 
@@ -109,9 +119,8 @@ public class MainLayout extends AppLayout {
             div.add(new Icon("lumo", "dropdown"));
             div.addClassNames(LumoUtility.Display.FLEX, LumoUtility.AlignItems.CENTER, LumoUtility.Gap.SMALL);
             userName.add(div);
-            userName.getSubMenu().addItem("Sign out", e -> {
-                authenticatedUser.logout();
-            });
+            userName.getSubMenu().addItem("Sign out", e -> authenticatedUser.logout());
+            userName.getSubMenu().addItem("Edit", e -> editarUsuario());
 
             layout.add(userMenu);
         } else {
@@ -121,6 +130,55 @@ public class MainLayout extends AppLayout {
 
         return layout;
     }
+
+    public void editarUsuario() {
+        Optional<User> maybeUser = authenticatedUser.get();
+        if (maybeUser.isEmpty()) {
+            Notification.show("Usuário não encontrado!", 3000, Notification.Position.MIDDLE);
+            return;
+        }
+
+        User usuario = maybeUser.get();
+
+        Dialog dialog = new Dialog();
+        dialog.setWidth("400px");
+        TextField txtUsername = new TextField("Username");
+        txtUsername.setValue(usuario.getUsername());
+        TextField txtNome = new TextField("Name");
+        txtNome.setValue(usuario.getName());
+
+        EmailField txtEmail = new EmailField("Email");
+        txtEmail.setValue(usuario.getEmail());
+
+        PasswordField txtSenha = new PasswordField("Nova Senha");
+
+        Button btnSalvar = new Button("Salvar", e -> {
+            usuario.setName(txtNome.getValue());
+            usuario.setEmail(txtEmail.getValue());
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            if (!txtSenha.getValue().isEmpty()) {
+                usuario.setPassword(passwordEncoder.encode(txtSenha.getValue()));
+            }
+
+            try {
+                userController.updateUser(usuario);
+                Notification.show("Usuário atualizado com sucesso!", 3000, Notification.Position.TOP_CENTER);
+                dialog.close();
+            } catch (Exception ex) {
+                Notification.show("Erro ao atualizar usuário!" + ex, 3000, Notification.Position.MIDDLE);
+            }
+        });
+
+        Button btnCancelar = new Button("Cancelar", e -> dialog.close());
+
+        HorizontalLayout buttons = new HorizontalLayout(btnSalvar, btnCancelar);
+        FormLayout form = new FormLayout(txtNome, txtEmail, txtSenha);
+        VerticalLayout layout = new VerticalLayout(form, buttons);
+
+        dialog.add(layout);
+        dialog.open();
+    }
+
 
     @Override
     protected void afterNavigation() {
