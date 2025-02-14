@@ -22,56 +22,60 @@ java -jar target/benchmark-covid-1.0-SNAPSHOT.jar
 ```
 
 ## Estrutura do projeto
-  📦 com.wendril.application
-    ├── 📂 controller
-      │   ├── 📄 BenchmarkApiController.java
-      │   ├── 📄 BenchmarkController.java
-      │   ├── 📄 ControllerGeneric.java
-      │   ├── 📄 CovidApiController.java
-      │   ├── 📄 ResultadoBenchmarkController.java
-      │   ├── 📄 TranslateApiGoogleController.java
-      │   ├── 📄 UserController.java
-      │
-    ├── 📂 model
-      │   ├── 📄 Benchmark.java
-      │   ├── 📄 DadosCovidPais.java
-      │   ├── 📄 ResultadoBenchmark.java
-      │   ├── 📄 User.java
-      │
-    ├── 📂 repository
-      │   ├── 📄 BenchmarkRepository.java
-      │   ├── 📄 ResultadoBenchmarkRepository.java
-      │   ├── 📄 UserRepository.java
-      │
-    ├── 📂 security
-      │   ├── 📄 AuthenticatedUser.java
-      │   ├── 📄 SecurityConfiguration.java
-      │   ├── 📄 UserDetailsServiceImpl.java
-      │
-    ├── 📂 services
-      │   ├── 📄 BenchmarkApiService.java
-      │   ├── 📄 BenchmarkStateService.java
-      │   ├── 📄 CovidApiService.java
-      │   ├── 📄 TranslateApiGoogleService.java
-      │
-    ├── 📂 utils
-      │   ├── 📄 ConverterJsonToDadosCovidPais.java
-      │   ├── 📄 DatePickerPT.java
-      │   ├── 📄 Message.java
-      │   ├── 📄 NotificationComponent.java
-      │   ├── 📄 Titles.java
-      │
-    ├── 📂 views
-      │   ├── 📂 benchmark
-      │   ├── 📂 history
-      │   ├── 📂 login
-      │   ├── 📂 register
-      │   ├── 📂 resultado
-      │   ├── 📄 MainLayout.java
-      │
-    ├── 📄 Application.java
-
-## Exemplo da Rota API para os Resultados de Total, Media, Max, Min, de casos e mortes dos dois paises comparados
+```
+📦 com.wendril.application
+├── 📂 controller
+│   ├── 📄 BenchmarkApiController.java
+│   ├── 📄 BenchmarkController.java
+│   ├── 📄 ControllerGeneric.java
+│   ├── 📄 CovidApiController.java
+│   ├── 📄 ResultadoBenchmarkController.java
+│   ├── 📄 TranslateApiGoogleController.java
+│   ├── 📄 UserController.java
+│
+├── 📂 data
+│   └── (Pasta vazia ou futura implementação)
+│
+├── 📂 model
+│   ├── 📄 Benchmark.java
+│   ├── 📄 DadosCovidPais.java
+│   ├── 📄 ResultadoBenchmark.java
+│   ├── 📄 User.java
+│
+├── 📂 repository
+│   ├── 📄 BenchmarkRepository.java
+│   ├── 📄 ResultadoBenchmarkRepository.java
+│   ├── 📄 UserRepository.java
+│
+├── 📂 security
+│   ├── 📄 AuthenticatedUser.java
+│   ├── 📄 SecurityConfiguration.java
+│   ├── 📄 UserDetailsServiceImpl.java
+│
+├── 📂 services
+│   ├── 📄 BenchmarkApiService.java
+│   ├── 📄 BenchmarkStateService.java
+│   ├── 📄 CovidApiService.java
+│   ├── 📄 TranslateApiGoogleService.java
+│
+├── 📂 utils
+│   ├── 📄 ConverterJsonToDadosCovidPais.java
+│   ├── 📄 DatePickerPT.java
+│   ├── 📄 Message.java
+│   ├── 📄 NotificationComponent.java
+│   ├── 📄 Titles.java
+│
+├── 📂 views
+│   ├── 📂 benchmark
+│   ├── 📂 history
+│   ├── 📂 login
+│   ├── 📂 register
+│   ├── 📂 resultado
+│   ├── 📄 MainLayout.java
+│
+├── 📄 Application.java
+```
+## Exemplo da rota API para os Resultados de casos e mortes dos dois paises comparados
 
 ```
 GET http://localhost:8080/api/compare/brazil/argentina?from=2020-03-01&to=2020-04-01
