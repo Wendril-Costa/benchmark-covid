@@ -1,12 +1,30 @@
 # benchmark-covid
 
-## Executando o aplicativo
+Só conseguir iniciar essa aplicação em uma segunda feira e estou finalizando ela na quinta as 23:59 da mesma semana.
+Como o tempo é corrido apenas apos o trabalho, no caso, as 18h consegui dar progressos na aplicação.
+O projeto tem muitas possibilidades de melhorias de codigo e implementação
 
-Abra o projeto em um IDE. Você pode baixar a edição da comunidade IntelliJ se ainda não tiver um IDE adequado. Uma vez aberto no IDE, localize a Applicationclasse e execute o método principal usando "Debug".
+## Aplicativo
 
-Para obter mais informações sobre a instalação em vários IDEs, veja como importar projetos Vaadin para diferentes IDEs .
+O Aplicativo contem uma Tela de Login e de Cadastro inicialmente
 
-Se você instalar o plugin Vaadin para IntelliJ, deverá iniciar a Applicationclasse usando "Depurar usando HotswapAgent" para ver as atualizações no código Java refletidas imediatamente no navegador.
+Apos logar o usuario seja jogado ao um Menu com 3 Opções
+
+O Usuario pode Deslogar ou Editar o Usuario ao clickar no nome 
+
+Em Benchmark o usuario pode fazer pesquisa de comparação ao digitar os nomes dos paises e colocar as datas
+
+Apos a pesquisa o usuario pode clickar no botão Resultado que ia lhe enviar para outra tela
+
+Na Tela Benchmatk Result ele tera as analises dos dois paises comparados
+
+Em History ele tera o seu historico de comparações que ele fez
+
+O Sistema tem uma Rota API para receber os resultados
+
+```
+GET http://localhost:8080/api/compare/brazil/canada?from=2020-03-08&to=2020-03-13
+```
 
 ## Implantando na produção
 
@@ -75,9 +93,5 @@ java -jar target/benchmark-covid-1.0-SNAPSHOT.jar
 │
 ├── 📄 Application.java
 ```
-## Exemplo da rota API para os Resultados de casos e mortes dos dois paises comparados
 
-```
-GET http://localhost:8080/api/compare/brazil/argentina?from=2020-03-01&to=2020-04-01
-```
 
