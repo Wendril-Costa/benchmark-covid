@@ -1,51 +1,79 @@
 # benchmark-covid
 
-This project can be used as a starting point to create your own Vaadin application with Spring Boot.
-It contains all the necessary configuration and some placeholder files to get you started.
+## Executando o aplicativo
 
-## Running the application
+Abra o projeto em um IDE. Você pode baixar a edição da comunidade IntelliJ se ainda não tiver um IDE adequado. Uma vez aberto no IDE, localize a Applicationclasse e execute o método principal usando "Debug".
 
-Open the project in an IDE. You can download the [IntelliJ community edition](https://www.jetbrains.com/idea/download) if you do not have a suitable IDE already.
-Once opened in the IDE, locate the `Application` class and run the main method using "Debug".
+Para obter mais informações sobre a instalação em vários IDEs, veja como importar projetos Vaadin para diferentes IDEs .
 
-For more information on installing in various IDEs, see [how to import Vaadin projects to different IDEs](https://vaadin.com/docs/latest/getting-started/import).
+Se você instalar o plugin Vaadin para IntelliJ, deverá iniciar a Applicationclasse usando "Depurar usando HotswapAgent" para ver as atualizações no código Java refletidas imediatamente no navegador.
 
-If you install the Vaadin plugin for IntelliJ, you should instead launch the `Application` class using "Debug using HotswapAgent" to see updates in the Java code immediately reflected in the browser.
+## Implantando na produção
 
-## Deploying to Production
-
-The project is a standard Maven project. To create a production build, call 
+O projeto é um projeto Maven padrão. Para criar uma compilação de produção, chame
 
 ```
 ./mvnw clean package -Pproduction
 ```
-
-If you have Maven globally installed, you can replace `./mvnw` with `mvn`.
-
-This will build a JAR file with all the dependencies and front-end resources,ready to be run. The file can be found in the `target` folder after the build completes.
-You then launch the application using 
+Se você tiver o Maven instalado globalmente, poderá substituí-lo ./mvnwpor mvn.
+ 
 ```
 java -jar target/benchmark-covid-1.0-SNAPSHOT.jar
 ```
 
-## Project structure
+## Estrutura do projeto
+  📦 com.wendril.application
+  ├── 📂 controller
+  │   ├── 📄 BenchmarkApiController.java
+  │   ├── 📄 BenchmarkController.java
+  │   ├── 📄 ControllerGeneric.java
+  │   ├── 📄 CovidApiController.java
+  │   ├── 📄 ResultadoBenchmarkController.java
+  │   ├── 📄 TranslateApiGoogleController.java
+  │   ├── 📄 UserController.java
+  │
+  ├── 📂 model
+  │   ├── 📄 Benchmark.java
+  │   ├── 📄 DadosCovidPais.java
+  │   ├── 📄 ResultadoBenchmark.java
+  │   ├── 📄 User.java
+  │
+  ├── 📂 repository
+  │   ├── 📄 BenchmarkRepository.java
+  │   ├── 📄 ResultadoBenchmarkRepository.java
+  │   ├── 📄 UserRepository.java
+  │
+  ├── 📂 security
+  │   ├── 📄 AuthenticatedUser.java
+  │   ├── 📄 SecurityConfiguration.java
+  │   ├── 📄 UserDetailsServiceImpl.java
+  │
+  ├── 📂 services
+  │   ├── 📄 BenchmarkApiService.java
+  │   ├── 📄 BenchmarkStateService.java
+  │   ├── 📄 CovidApiService.java
+  │   ├── 📄 TranslateApiGoogleService.java
+  │
+  ├── 📂 utils
+  │   ├── 📄 ConverterJsonToDadosCovidPais.java
+  │   ├── 📄 DatePickerPT.java
+  │   ├── 📄 Message.java
+  │   ├── 📄 NotificationComponent.java
+  │   ├── 📄 Titles.java
+  │
+  ├── 📂 views
+  │   ├── 📂 benchmark
+  │   ├── 📂 history
+  │   ├── 📂 login
+  │   ├── 📂 register
+  │   ├── 📂 resultado
+  │   ├── 📄 MainLayout.java
+  │
+  ├── 📄 Application.java
 
-- `MainLayout.java` in `src/main/java` contains the navigation setup (i.e., the
-  side/top bar and the main menu). This setup uses
-  [App Layout](https://vaadin.com/docs/components/app-layout).
-- `views` package in `src/main/java` contains the server-side Java views of your application.
-- `views` folder in `src/main/frontend` contains the client-side JavaScript views of your application.
-- `themes` folder in `src/main/frontend` contains the custom CSS styles.
+## Exemplo da Rota API para os Resultados de Total, Media, Max, Min, de casos e mortes dos dois paises comparados
 
-## Useful links
+```
+GET http://localhost:8080/api/compare/brazil/argentina?from=2020-03-01&to=2020-04-01
+```
 
-- Read the documentation at [vaadin.com/docs](https://vaadin.com/docs).
-- Follow the tutorial at [vaadin.com/docs/latest/tutorial/overview](https://vaadin.com/docs/latest/tutorial/overview).
-- Create new projects at [start.vaadin.com](https://start.vaadin.com/).
-- Search UI components and their usage examples at [vaadin.com/docs/latest/components](https://vaadin.com/docs/latest/components).
-- View use case applications that demonstrate Vaadin capabilities at [vaadin.com/examples-and-demos](https://vaadin.com/examples-and-demos).
-- Build any UI without custom CSS by discovering Vaadin's set of [CSS utility classes](https://vaadin.com/docs/styling/lumo/utility-classes). 
-- Find a collection of solutions to common use cases at [cookbook.vaadin.com](https://cookbook.vaadin.com/).
-- Find add-ons at [vaadin.com/directory](https://vaadin.com/directory).
-- Ask questions on [Stack Overflow](https://stackoverflow.com/questions/tagged/vaadin) or join our [Forum](https://vaadin.com/forum).
-- Report issues, create pull requests in [GitHub](https://github.com/vaadin).
