@@ -2,7 +2,7 @@
 
 Só conseguir iniciar essa aplicação em uma segunda feira e estou finalizando ela na quinta as 23:59 da mesma semana.
 Como o tempo é corrido apenas apos o trabalho, no caso, as 18h consegui dar progressos na aplicação.
-O projeto tem muitas possibilidades de melhorias de codigo, implementação, verificações, erros e testes.
+O projeto ainda existe muitas possibilidades de melhorias de codigo, implementação, verificações, erros e testes.
 
 ## Aplicativo
 
